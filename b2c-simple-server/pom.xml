@@ -108,6 +108,15 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+        <!--<dependency>-->
+        <!--<groupId>com.alipay</groupId>-->
+        <!--<artifactId>sdk-java</artifactId>-->
+        <!--<version>20170324180803</version>-->
+        <!--</dependency>-->
         <!--<dependency>-->
             <!--<groupId>org.apache.httpcomponents</groupId>-->
             <!--<artifactId>httpclient</artifactId>-->
@@ -120,6 +129,24 @@
         <dependency>
             <groupId>org.springframework.session</groupId>
             <artifactId>spring-session-data-redis</artifactId>
+        </dependency>
+        <!-- ali短信 sdk -->
+        <dependency>
+            <groupId>com.aliyun</groupId>
+            <artifactId>aliyun-java-sdk-core</artifactId>
+            <version>2.4.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.aliyun</groupId>
+            <artifactId>aliyun-java-sdk-sms</artifactId>
+            <version>3.0.0-rc1</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>net.sourceforge.jexcelapi</groupId>
+            <artifactId>jxl</artifactId>
+            <version>2.6.10</version>
         </dependency>
     </dependencies>
 

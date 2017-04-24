@@ -1,96 +1,64 @@
 package com.bigdatan.b2c.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Data;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
 /**
  * 广告实体类
  */
+@Data
 public class Ad implements Serializable {
+    /**
+     * 广告id，主键，自增1
+     */
     private Integer adId;
+    /**
+     * 广告位置id
+     */
+    ////@MultiLanguageField
+    @Column(name = "ad_position_id")
     private Integer adPositionId;
+    /**
+     * 广告图像地址
+     */
+    ////@MultiLanguageField
+    @Column(name = "image")
     private String image;
+    /**
+     * 广告描述
+     */
+    ////@MultiLanguageField
+    @Column(name = "description")
     private String description;
+    /**
+     * 广告链接
+     */
+    ////@MultiLanguageField
+    @Column(name = "url")
     private String url;
-    private Byte state;
+    /**
+     * 状态，1开启 2关闭
+     */
+    ////@MultiLanguageField
+    @Column(name = "state")
+    private Integer state;
+
+    /**
+     * 删除状态 1 已删除 2 未删除
+     */
+    ////@MultiLanguageField
+    @Column(name = "del_state")
+    private Integer delState;
+
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date createTime;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date updateTime;
-    private Byte delState;
 
-    public Integer getAdId() {
-        return adId;
-    }
 
-    public void setAdId(Integer adId) {
-        this.adId = adId;
-    }
-
-    public Integer getAdPositionId() {
-        return adPositionId;
-    }
-
-    public void setAdPositionId(Integer adPositionId) {
-        this.adPositionId = adPositionId;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public Byte getState() {
-        return state;
-    }
-
-    public void setState(Byte state) {
-        this.state = state;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public Date getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
-
-    public Byte getDelState() {
-        return delState;
-    }
-
-    public void setDelState(Byte delState) {
-        this.delState = delState;
-    }
 
 }

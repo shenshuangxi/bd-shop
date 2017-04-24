@@ -7,7 +7,6 @@ import java.util.Date;
 
 /**
  *
- *
  * 广告位置实体类
  */
 public class AdPosition implements Serializable {

@@ -146,7 +146,7 @@
 	<select id="getTotalDetailsAmountByOrderDetailsAdminSearchVO" parameterType="com.bigdatan.b2c.vo.OrderDetailsAdminSearchVO"
 		resultType="long">
 		select				
-		sum(details_amount)		
+		case when sum(details_amount) is null then 0 else sum(details_amount) end	
 		from t_order_details			
 		where 1=1 
 		<if test="goodsName != null and goodsName !=''">
@@ -174,8 +174,8 @@
 	
 	<select id="getTotalNumAmountByOrderDetailsAdminSearchVO" parameterType="com.bigdatan.b2c.vo.OrderDetailsAdminSearchVO"
 		resultType="long">
-		select				
-		sum(num)			
+		select	
+		case when sum(num) is null then 0 else sum(num)	end
 		from t_order_details			
 		where 1=1 
 		<if test="goodsName != null and goodsName !=''">
@@ -201,7 +201,7 @@
 		</if>
 	</select>
 	
-	<select id="getPageByOrderDetailsAdminSearchVO" parameterType="com.bigdatan.b2c.vo.OrderDetailsAdminSearchVO"
+	<select id="getPageByOrderDetailsAdminSearchVO" parameterType="ccom.bigdatan.b2c.vo.OrderDetailsAdminSearchVO"
 		resultMap="BaseResultMap">
 		select				
 		<include refid="Base_Column_List" />		
@@ -233,7 +233,9 @@
 	
 	<select id="getDetailReportByOrderDetailsAdminSearchVO" parameterType="com.bigdatan.b2c.vo.OrderDetailsAdminSearchVO"
 		resultMap="BaseResultMap">		
-		select t.price_id price_id,t.unit_name unit_name,t.goods_name goods_name,sum(t.num) as num,sum(t.details_amount) as details_amount,
+		select t.price_id price_id,t.unit_name unit_name,t.goods_name goods_name,
+		case when sum(t.num) is null then 0  else sum(t.num) end as num,
+		case when sum(t.details_amount) is null then 0 else sum(t.details_amount) end as details_amount,
 		left(t.create_time,10) as create_time 
 		from  t_order_details t 
 		where t.price_id = #{goodsName,jdbcType=INTEGER} 

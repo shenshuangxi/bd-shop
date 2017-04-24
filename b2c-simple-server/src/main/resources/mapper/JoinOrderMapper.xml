@@ -4,10 +4,10 @@
 	<resultMap id="BaseResultMap" type="com.bigdatan.b2c.entity.JoinOrder">
 		<id column="join_order_id" property="joinOrderId" jdbcType="INTEGER" />
 		<result column="join_order_number" property="joinOrderNumber"
-			jdbcType="VARCHAR" />
+				jdbcType="VARCHAR" />
 		<result column="order_ids" property="orderIds" jdbcType="VARCHAR" />
 		<result column="order_numbers" property="orderNumbers"
-			jdbcType="VARCHAR" />
+				jdbcType="VARCHAR" />
 		<result column="total_price" property="totalPrice" jdbcType="INTEGER" />
 	</resultMap>
 	<sql id="Base_Column_List">
@@ -15,7 +15,7 @@
 		total_price
 	</sql>
 	<select id="selectByJoinOrderNumber" resultMap="BaseResultMap"
-		parameterType="com.bigdatan.b2c.entity.JoinOrder">
+			parameterType="com.bigdatan.b2c.entity.JoinOrder">
 		select
 		<include refid="Base_Column_List" />
 		from t_order_join
