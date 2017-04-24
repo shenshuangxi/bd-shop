@@ -1,4 +1,4 @@
-package com.bigdatan.mit.cloud.swagger.properties;
+package com.bigdatan.framework.swagger.properties;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

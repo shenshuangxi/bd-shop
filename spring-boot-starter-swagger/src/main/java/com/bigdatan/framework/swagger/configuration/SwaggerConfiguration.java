@@ -1,6 +1,7 @@
 package com.bigdatan.framework.swagger.configuration;
 
-import com.bigdatan.mit.cloud.swagger.properties.SwaggerConfigurationProperties;
+
+import com.bigdatan.framework.swagger.properties.SwaggerConfigurationProperties;
 import com.fasterxml.classmate.TypeResolver;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
