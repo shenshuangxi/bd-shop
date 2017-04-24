@@ -5,6 +5,16 @@
 ------------------------------------------------
 ## BDShop 系统简介
 
-BDShop商城系统是B2C模式的电子商城，是在springboot+nodejs基础上搭建的前后端分离的java项目。让您轻松打造自己的独立商城，同时也方便二次开发，让您快速搭建个性化独立商城，为您节约更多时间，去陪恋人、家人和朋友。
+BDShop商城系统是B2C模式的电子商城
+后端基于springboot
+前端基于nodejs
+实现的前后端分离架构的项目
+
+##BDShop技术路线
+后端构建:spring-boot+mybatis+pagehelper+Swagger2构建RESTful API
+
+前端构建:nodejs+gulp+requirejs+art-template+bootstrap+weui
+
+
 
 
