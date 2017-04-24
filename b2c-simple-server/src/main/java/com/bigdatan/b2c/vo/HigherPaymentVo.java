@@ -1,5 +1,7 @@
 package com.bigdatan.b2c.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -12,7 +14,9 @@ public class HigherPaymentVo implements Serializable {
     private String name; // 付款方式名称
     private String description; // 描述
     private Byte isOwnered; // 是否拥有 1 拥有 2 不拥有
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date createTime; // 创建时间
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date updateTime; // 更新时间
     private Byte state; // 状态 ：1 已删除 2 未删除
 

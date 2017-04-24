@@ -1,5 +1,7 @@
 package com.bigdatan.b2c.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -29,9 +31,9 @@ public class Receive implements Serializable {
     private Byte isDefault; // 是否默认
 
     private Byte delState;
-
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date createTime;
-
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date updateTime;
 
     public Byte getDelState() {

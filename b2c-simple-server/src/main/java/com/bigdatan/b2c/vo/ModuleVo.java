@@ -1,5 +1,7 @@
 package com.bigdatan.b2c.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -13,7 +15,9 @@ public class ModuleVo implements Serializable {
     private String name;
     private String url;
     private String description;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date createTime;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date updateTime;
     private Byte state;
     private Byte isOwnered; // 是否拥有 1 拥有 2 不拥有

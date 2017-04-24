@@ -1,5 +1,6 @@
 package com.bigdatan.b2c.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -8,7 +9,7 @@ import com.bigdatan.b2c.entity.Receive;
 import com.bigdatan.b2c.entity.User;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-public class Order {
+public class Order implements Serializable {
 	private Integer orderId;
 
 	private String orderNumber;
@@ -31,9 +32,9 @@ public class Order {
 	private String paymentSeq; // 在线支付流水号
 
 	private Byte payState;
-
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
 	private Date createTime;
-
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
 	private Date updateTime;
 	
 	/**
