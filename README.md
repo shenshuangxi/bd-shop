@@ -16,8 +16,9 @@ BDShop商城系统是B2C模式的电子商城
 前端构建:nodejs+gulp+requirejs+art-template+bootstrap+weui
 
 ## BDShop 项目截图
+![商品列表](https://git.oschina.net/uploads/images/2017/0424/120936_4639108f_127930.png "商品列表")
 
-![商品列表](https://git.oschina.net/uploads/images/2017/0424/120814_7ad50b05_127930.jpeg "商品列表")
+
 
 
 
