@@ -6,7 +6,7 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <title>个人中心</title>
+    <title>个人账户</title>
     <link href="/src/image/favicon.ico" type="image/x-icon" rel=icon>
     <link href="/src/image/favicon.ico" type="image/x-icon" rel="shortcut icon">
 
@@ -44,9 +44,8 @@
     <div class="weui-cell__bd">
         <p>头像</p>
     </div>
-    <div class="weui-cell__ft"><img
-            src="{{headimgurl}}"
-            alt="" style="width:50px;margin-right:15px;display:block;border-radius: 50%;" >
+    <div class="weui-cell__ft" style="height:50px;">
+        <img src="{{headimgurl}}" alt=""  onerror="javascript:this.src='/src/image/defaulr_portrait.png '" style="width:50px;height:100%;margin-right:15px;display:block;border-radius: 50%;" >
         <input id="uploaderInput" class="weui-uploader__input" type="file" accept="image/*">
     </div>
 </a>
@@ -67,6 +66,9 @@
         <input class="weui-input" type="text" style="text-align:right" id="phone" value="{{phone}}" >
     </div>
 </a>
+ <div id="save" style="padding: 0 15px; margin-top:50px;">
+    <div class="weui-btn weui-btn_primary" style="background-color:#2CC27B;">保存</div>
+</div>
 </script>
 </body>
 </html>

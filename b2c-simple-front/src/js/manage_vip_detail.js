@@ -100,7 +100,7 @@ define(['jquery', "template", "components",  "jqueryValidate", "manageCommon"], 
 
      function getUserInfo(id){
             var url = apiUrl + "/admin/user/userAdmin/getUserById?userId="+id;
-            components.getMsg(url, "get").done(function(msg) {
+            components.getMsg(url, "post").done(function(msg) {
             var res = msg.res;
             if (res == 1) {
                 msg.obj.image = apiUrlPic+msg.obj.image;
@@ -115,7 +115,7 @@ define(['jquery', "template", "components",  "jqueryValidate", "manageCommon"], 
 
     function getUserHigherPayment(id){
         var url = apiUrl + "/admin/user/userAdmin/queryUserHigherPayment?userId="+id;
-        components.getMsg(url, "get").done(function(msg2) {
+        components.getMsg(url, "post").done(function(msg2) {
             var res = msg2.res;
             if (res == 1) {
                 var html = template('method-tp', msg2);
@@ -129,7 +129,7 @@ define(['jquery', "template", "components",  "jqueryValidate", "manageCommon"], 
 
     function getUserPrivilege(id){
         var url = apiUrl + "/admin/user/userAdmin/queryUserPrivilege?userId="+id;
-        components.getMsg(url, "get").done(function(msg3) {
+        components.getMsg(url, "post").done(function(msg3) {
             var res = msg3.res;
             if (res == 1) {
                 //msg.obj.image = apiUrlPic+msg.obj.image;

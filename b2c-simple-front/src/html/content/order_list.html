@@ -22,7 +22,10 @@
         .weui-form-preview__btn:active {
             color: #686868;
         }
-
+        .weui-navbar__item.weui-bar__item--on {
+            background: #eaeaea;
+            color: #414141;
+        }
         .clearfix:after {
             content: ".";
             display: block;
@@ -38,20 +41,39 @@
         .order-list-block:before {
             border-top: none;
         }
+        .weui-navbar__item div {
+            position: absolute;
+            width: 60%;
+            left: 20%;
+            height: 4px;
+            background: #EAEAEA;
+            top: 47px;
+        }
+        .active_div {
+            background: #2CC27B!important;
+        }
+        .weui-navbar__item {
+            background: #eaeaea;
+            color: #414141;
+        }
+        #order-list a:after{
+            border-right: none;
+        }
     </style>
 </head>
 
 <body class="grey-body">
-<div class="weui-form-preview__ft">
-    <div class="weui-form-preview__btn weui-form-preview__btn_default" id="all">全部</div>
-    <div class="weui-form-preview__btn weui-form-preview__btn_default" id="noPay">未付款</div>
-    <div class="weui-form-preview__btn weui-form-preview__btn_default" id="pay">已付款</div>
+<div class="weui-navbar" id="order-list">
+    <a class="weui-navbar__item weui-bar__item--on weui-tab__bd-item--active" state="" id="all">全部 <div class="active_div"></div></a>
+    <a class="weui-navbar__item" id="noPay" state="1" >未付款<div></div></a>
+    <a class="weui-navbar__item" id="pay" state="2" >已付款<div></div></a>
 </div>
-<div style="">
+<br/>
+<div class="weui-cells">
     <div class="weui-cell" style="background-color:#FFFFFF;">
         <div class="weui-btn" style="width: 45%; float: left; ">
-            <select id="paymentId" class="weui-select " style="font-size: small">
-                <option selected="" value="0">选择付款方式</option>
+            <select id="paymentId" class="weui-select " style="font-size: small;">
+                <option selected="" value="">选择付款方式</option>
                 <option value="2">在线付款</option>
                 <option value="3">累计结算</option>
                 <option value="1">货到付款</option>
@@ -60,9 +82,9 @@
         <div style="width: 10%;">
 
         </div>
-        <div class="weui-btn" style="width: 45%; ">
-            <select id="logisticsState" class="weui-select" style="font-size: small">
-                <option selected="" value="0">选择配送情况</option>
+        <div class="weui-btn" style="width: 45%;">
+            <select id="logisticsState" class="weui-select" style="font-size: small;">
+                <option selected="" value="">选择配送情况</option>
                 <option value="1">等待配送</option>
                 <option value="2">已配送</option>
                 <option value="3">已确认收货</option>
@@ -80,8 +102,7 @@
             <a href="/page/order_detail.html?id={{value.orderNumber}}" class="clearfix">
                 <span style="color: #999;font-size: 14px;padding-left: 15px;">订单号：{{value.orderNumber}}</span>
             </a>
-
-            <div style="position: absolute;right: 15px;top: 12px;">
+            <div style="position:absolute;right:15px;top:12px;">
                 {{if value.payState==1}}
                 <a href="pay_check.html?orderNumber={{value.orderNumber}}&price={{value.totalAmount/100}}"
                    class="weui-btn weui-btn_disabled weui-btn_mini"
@@ -105,7 +126,7 @@
 
                 <p>
                     <span style="font-size: 14px;">订单金额：</span>
-                    <span style="color:  #FF715B;">¥{{value.totalAmount}}</span>
+                    <span style="color:#FF715B;">¥{{value.totalAmount}}</span>
                 </p>
 
                 <p class="clearfix"><span style="color: #07141e;color: #838383;font-size:14px;float: left">{{value.payment.name}}

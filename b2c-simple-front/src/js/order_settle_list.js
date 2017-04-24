@@ -7,13 +7,14 @@ define(['jquery', "components", "common", "template", "weui"], function (jquery,
     var _logisticsState = null;
     var money = 0;
     var num = 0;
+    var len;
     var orderList = {
-        page: 0, //触发获取数据的数次(+1等于页码)
-        size: 15, //每次触发取的记录条数
-        isLoading: false, //列表是否加载中，避免重复触底加载
+        page: 0, 
+        size: 15, 
+        isLoading: false,
         url:apiUrl + "/front/order/order/getLJOrderByPage?pageSize=4",
         getMore: function (first) {
-            if (orderList.isLoading) //取数过程中，先停止重复取数
+            if (orderList.isLoading) 
                 return;
 
             if (first) {
@@ -23,12 +24,12 @@ define(['jquery', "components", "common", "template", "weui"], function (jquery,
             } else {
                 orderList.page += 1;
             }
-            $loadmore.show(); //显示加载框
+            $loadmore.show(); 
             orderList.isLoading = true;
-            setTimeout(orderList.d(orderList.page, orderList.size), 1000); //模拟延迟取数据
+            setTimeout(orderList.d(orderList.page, orderList.size), 1000);   
         },
 
-        //异步获取文章列表
+
         d: function (page, size) {
             $.ajax({
                 url: orderList.url,
@@ -63,12 +64,6 @@ define(['jquery', "components", "common", "template", "weui"], function (jquery,
                     var newsJson = msg.dataList;
                     var html = template('order-box-tpl', msg);
                    // $("#order-box").html(html);
-                    for (var x in msg.dataList) {
-                        $("#order-box").on("click", "#checkbox_" + x, function () {
-                            getTotalAmount(this.id.substring(9));
-                        });
-                    }
-                    ;
                     if (newsJson && newsJson.length > 0) {
                         orderList.isLoading = false;
                         $noRec.hide();
@@ -78,10 +73,13 @@ define(['jquery', "components", "common", "template", "weui"], function (jquery,
                     }
                     if (orderList.page > 1) {
                         $orderList.append(html);
+                        len =$("#order-box .order-list");
                     } else {
                         $orderList.html(html);
+                        len =$("#order-box .order-list");
                     }
-                    $loadmore.hide(); //隐藏加载框
+                    $loadmore.hide();
+
                 } else {
                     $noRec.show();
                     $loadmore.hide();
@@ -93,9 +91,9 @@ define(['jquery', "components", "common", "template", "weui"], function (jquery,
     $(window).scroll(function () {
         var num1 = $(document).scrollTop() + $(window).height() + (50 + 50);
         var num2 = $(document).height();
-        //滚动高度 + 窗口高度 + (底部导航高度 + 版权块高度) >= 文档高度，注意：文档高度不包括fixed定位的元素（分类导航、底部导航）
+       
         if (num1 >= num2) {
-            orderList.getMore(false); //获取数据
+            orderList.getMore(false); 
         }
     });
     orderList.getMore(true);
@@ -126,7 +124,11 @@ define(['jquery', "components", "common", "template", "weui"], function (jquery,
 
     $("#order_submit").click(function () {
         if (money != null && money >= 10000) {
-            $.toast("閲戦瓒呰繃10000", "text");
+            //$.toast("閲戦瓒呰繃10000", "text");
+            return;
+        }
+        if(money<=0){
+            $.toast("璇烽�夋嫨涓�涓幓浠樻", "text");
             return;
         }
         var url = apiUrl + "/front/order/order/joinOrder";
@@ -147,24 +149,39 @@ define(['jquery', "components", "common", "template", "weui"], function (jquery,
             var res = msg.res;
             if (res == 1) {
                 // msg = msg.obj;
-                window.location.href = '/page/pay_check.html?orderNumber=' + msg.result + '&price=' + money;
+                window.location.href = '/page/pay_check_settle.html?orderNumber=' + msg.result + '&price=' + money;
+            }else{
+                $.toast("璐拱澶辫触", "text");
             }
         });
     });
-    function getTotalAmount(value) {
-        var totalAmount = $("#totalAmount_" + value).val();
-        var moduleCheckBox = document.getElementsByName("checkbox");
+    function getTotalAmount($this) {
+        var totalAmount = $this.attr("Money");
+        //alert(totalAmount);
+        //var moduleCheckBox = document.getElementsByName("checkbox");
         money = $("#total-money").text();
-        if (moduleCheckBox[value].checked) {
-            money = parseInt(money) + parseInt(totalAmount);
+        if ($this.is(":checked")) {
+            money = parseInt(money * 100) + parseInt(totalAmount * 100);
             num++;
         } else {
-            money = parseInt(money) - parseInt(totalAmount);
+            money = parseInt(money * 100) - parseInt(totalAmount * 100);
             num--;
+        }
+        money = money / 100;
+        if (money != null && money >= 10000) {
+           $("#order_submit").text("瓒呭嚭鏀粯閲戦");
+           $("#order_submit").css("background-color", "#C6C6C6");
+        } else {
+            $("#order_submit").text("缁撶畻");
+            $("#order_submit").css("background-color", "#2BC17A");
         }
         $("#total-money").text(money);
         $("#num").text(num);
     }
+     $("#order-box").on("click", ".chosen", function () {
+        var _this = $(this);
+        getTotalAmount(_this);
+    });
 
     $("#total-money").text(money);
     $("#num").text(num);

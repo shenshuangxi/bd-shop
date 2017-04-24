@@ -38,15 +38,12 @@
 </head>
 <body ontouchstart>
     <div class="container" style="max-width: 600px; margin: 0 auto;padding-bottom: 60px;">
-        <div class="page" id="article-info">
+        <div class="page" id="article-info" style="overflow-y: auto;">
         </div>
         <script type="text/html" id="article-tpl">
             <div class="page__hd" style="padding: 10px;margin:0 10px;border-bottom: 1px solid #ddd;">
                 <h4 class="page__title" style="font-weight: normal;font-size: 16px;">{{obj.title}}</h4>
                 <p class="page__desc" style="color: #999;font-size: 15px;"><span>发布时间：</span>{{obj.createTime}}</p> <!--这里需要载入时间  发布时间：+$(data.time)-->
-            </div>
-            <div class="page__bd" style="padding:10px;">
-
             </div>
             <div class="page__bd">
                 <article class="weui-article">
@@ -56,11 +53,11 @@
                 </article>
             </div>
         </script>
-        <div class="button-sp-area" style="padding: 10px;">
-            <a href="javascript:void(0);" class="weui-btn weui-btn_primary"v onclick="window.history.go(-1);">返回</a>
+        <div class="button-sp-area" style="position:fixed;bottom: 20px;margin-left:5%;width: 90%;">
+            <a href="javascript:void(0);" class="weui-btn weui-btn_primary" style="background: #2BC17A;" onclick="window.history.go(-1);">返回</a>
         </div>
     </div>
-    </div>
-    <!--include "../public/footer.html"-->
+
+
 </body>
 </html>

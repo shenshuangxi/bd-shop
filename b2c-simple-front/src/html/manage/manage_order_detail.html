@@ -10,8 +10,7 @@
     <link rel="stylesheet" href="/src/font/iconfont.css">
     <link rel="stylesheet" href="/src/libs/bootstrap-3.3.5-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/manage.css">
-    <script id="script" src="/src/libs/require.min.js" defer async="true" require-module="./manage_order_detail"
-            data-main="/src/js/config.js"></script>
+    <script id="script" src="/src/libs/require.min.js" defer async="true" require-module="./manage_order_detail" data-main="/src/js/config.js"></script>
     <!--[if lt IE 9]>
     <script src="/lib/html5shiv.min.js"></script>
     <script src="/lib/respond.min.js"></script>
@@ -33,14 +32,14 @@
                onclick="window.history.go(-1);">返回</a>
         </div>
     </div>
-    <div class="row">
-        <h2 class="b-b text-md p-b-lg p-t-lg p-l-lg">订单信息</h2>
+    <div class="row" style="margin-left: 0;margin-right: 15px;padding-left: 20px;">
+        <h2 class="b-b text-md p-b-lg p-t-lg">订单信息</h2>
 
         <div id="orderinfo">
 
         </div>
         <script type="text/html" id="orderinfo-tpl">
-            <table border="1" style="border: 1px; width: 80%;  ">
+            <table border="1"  class="table table-bordered">
                 <tr>
                     <td>订单号</td>
                     <td>{{obj.orderNumber}}</td>
@@ -58,13 +57,13 @@
             </table>
         </script>
 
-        <h2 class="b-b text-md p-b-lg p-t-lg p-l-lg">支付状况</h2>
+        <h2 class="b-b text-md p-b-lg p-t-lg">支付状况</h2>
 
         <div id="payInfo">
 
         </div>
         <script type="text/html" id="payInfo-tpl">
-            <table border="1" style="border: 1px; width: 80%;  ">
+            <table border="1" class="table table-bordered">
                 <tr>
                     <td>订单总金额</td>
                     <td>{{obj.totalAmount/100}}</td>
@@ -82,10 +81,10 @@
             </table>
         </script>
 
-        <h2 class="b-b text-md p-b-lg p-t-lg p-l-lg">所选购商品</h2>
+        <h2 class="b-b text-md p-b-lg p-t-lg">所选购商品</h2>
 
-        <div class="table-responsive col-lg-11 col-lg-offset-1 row">
-            <table class="table table-hover table-bordered m-t" style="width:500px">
+        <div class="table-responsive row" style="margin-left: 0;margin-right: 0;">
+            <table class="table table-hover table-bordered m-t" style="">
                 <thead>
                 <tr>
                     <th class="font-normal text-basic" width="5%">序号</th>
@@ -122,13 +121,13 @@
             </table>
         </div>
 
-        <h2 class="b-b text-md p-b-lg p-t-lg p-l-lg">配送信息</h2>
+        <h2 class="b-b text-md p-b-lg p-t-lg">配送信息</h2>
 
         <div id="logisticsInfo">
 
         </div>
         <script type="text/html" id="logisticsInfo-tpl">
-            <table border="1" style="border: 1px; width: 80%;  ">
+            <table border="1" class="table table-hover table-bordered m-t">
                 <tr>
                     <td>送货地址</td>
                     <td>{{obj.receive.receiveProvince }}&nbsp; {{obj.receive.receiveCity}}&nbsp;
@@ -155,9 +154,9 @@
             </table>
         </script>
 
-        <h2 class="b-b text-md p-b-lg p-t-lg p-l-lg">付款凭证</h2>
+        <h2 class="b-b text-md p-b-lg p-t-lg">付款凭证</h2>
 
-        <div id="payCertify">
+        <div id="payCertify" class="m-t">
 
         </div>
         <script type="text/html" id="payCertify-tpl">

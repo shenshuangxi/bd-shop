@@ -20,6 +20,12 @@ define(["jquery", "components", "bootstrap", "manageCommon", "jqueryValidate","h
             if (res == 1) {
                 msg.dataList = msg.list;
 				if(msg.dataList != undefined && msg.dataList.length>0){
+					//处理创建日期和金额
+					for (var j = 0; j < msg.dataList.length; j++) {
+						msg.dataList[j].createTime = components.formatDate(msg.dataList[j].createTime);
+						msg.dataList[j].detailsAmount = msg.dataList[j].detailsAmount/100;
+					}
+					
 					//给时间定义了两个全局变量,方便下面字符串拼接
 					var createTime = "";
 					var createTimeTemp = "";
@@ -31,19 +37,40 @@ define(["jquery", "components", "bootstrap", "manageCommon", "jqueryValidate","h
 					var detailsAmountTemp="";
 					var goodsName="";
 					var unitName="";
-					for (var j = 0; j < msg.dataList.length; j++) {
-						msg.dataList[j].createTime = components.formatDate(msg.dataList[j].createTime);
+					
+					var diffData=GetDateDiff(createTime_ge,createTime_le);
+					//alert(diffData);
+					var date = new Date(Date.parse(createTime_ge.replace(/-/g,"/")));//获取查询起始时间
+					var j=0;
+					for(var i=0;i<diffData;i++){				
+						var date = new Date(Date.parse(createTime_ge.replace(/-/g,"/")));//获取查询起始时间					
+						date.setDate(date.getDate()+i);
+						date=date.Format("yyyy-MM-dd");
+						
 						//取值
-						var createTimeTemp=msg.dataList[j].createTime;
-						var numTemp=msg.dataList[j].num;
-						var detailsAmountTemp=msg.dataList[j].detailsAmount;
-						unitName=msg.dataList[j].unitName;
-						goodsName=msg.dataList[j].goodsName;
+						var createTimeTemp="";//msg.dataList[j].createTime;
+						var numTemp="";//msg.dataList[j].num;
+						var detailsAmountTemp="";//msg.dataList[j].detailsAmount;
+						if(j<msg.dataList.length && date == msg.dataList[j].createTime){
+							createTimeTemp=msg.dataList[j].createTime;
+							numTemp=msg.dataList[j].num;
+							detailsAmountTemp=msg.dataList[j].detailsAmount;							 
+							unitName=msg.dataList[j].unitName;
+							goodsName=msg.dataList[j].goodsName;
+							j++;
+						}else{
+							//没有找到数据
+							createTimeTemp=date;
+							numTemp=0;
+							detailsAmountTemp=0;
+						}
+						
 						//把单个数据循环从后台拿到的json数组里取出来，拼接成字符串
 						createTime=createTime += ",'"+createTimeTemp+"'"; 
 						num=num += ","+numTemp+"";
-						detailsAmount=detailsAmount+=","+detailsAmountTemp/100+"";
+						detailsAmount=detailsAmount+=","+detailsAmountTemp+"";
 					}
+					
 					createTime=createTime.substring(1); //前面拼接字符串，逗号是放在前面的，这个意思是截取掉第一个字符
 					createTime="["+createTime+"]";  //到这一步是把字符串拼接成json数组的样式，但不是json数组
 					num=num.substring(1);
@@ -118,5 +145,31 @@ define(["jquery", "components", "bootstrap", "manageCommon", "jqueryValidate","h
         });
 	}
 
+	//计算天数差
+	function GetDateDiff(startDate,endDate) { 
+		var startTime = new Date(Date.parse(startDate.replace(/-/g,   "/"))).getTime(); 
+		var endTime = new Date(Date.parse(endDate.replace(/-/g,   "/"))).getTime(); 
+		var dates = Math.abs((startTime - endTime))/(1000*60*60*24);    
+		return  parseInt(dates);
+	}
 
+	//日期格式化
+	Date.prototype.Format = function(fmt)   
+	{ //author: meizz   
+	var o = {   
+    "M+" : this.getMonth()+1,                 //月份   
+    "d+" : this.getDate(),                    //日   
+    "h+" : this.getHours(),                   //小时   
+    "m+" : this.getMinutes(),                 //分   
+   "s+" : this.getSeconds(),                 //秒   
+    "q+" : Math.floor((this.getMonth()+3)/3), //季度   
+    "S"  : this.getMilliseconds()             //毫秒   
+	};   
+	if(/(y+)/.test(fmt))   
+		fmt=fmt.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length));   
+	for(var k in o)   
+		if(new RegExp("("+ k +")").test(fmt))   
+		fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));   
+	return fmt;   
+	}  
 });

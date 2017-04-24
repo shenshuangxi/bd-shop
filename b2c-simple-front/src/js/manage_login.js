@@ -13,9 +13,7 @@ define(['jquery', "jqueryCookie", "components","manageCommon"], function(jquery,
     function login() {
         var data = "&adminName=" + $("#user-name").val() + "&password=" + $("#password").val();
         var url = apiUrl + "/adminLogin/toLogin";
-     //   alert(url)
-        components.getMsg(url, data, "get").done(function(msg) {
-       //     alert(111);
+        components.getMsg(url, data, "post").done(function(msg) {
             var res = msg.res;
             msg = msg.obj;
             if (res == 1) {

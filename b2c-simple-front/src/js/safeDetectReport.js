@@ -41,5 +41,6 @@ define(['jquery', "components", "common", "template"], function(jquery, componen
 			}			
 		 });
     }
+    $("#article-info").height($(window).height()-80);
 	
 });

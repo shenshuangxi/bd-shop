@@ -60,7 +60,7 @@
 
 <body class="grey-body" ontouchstart="">
 
-<div id="order-box" class="weui-cells" style="margin-top:0;overflow: auto;padding-bottom: 60px;">
+<div id="order-box" class="weui-cells" style="margin-top:0;overflow: auto;">
 </div>
 
 <div class="weui-loadmore" id="weui-loadmore" style="padding-bottom:80px;">
@@ -72,16 +72,16 @@
 </div>
 <script type="text/html" id="order-box-tpl">
     {{each dataList as value i}}
-    <div class="weui-cells weui-cells_checkbox " style="background-color: #FFFFFF;margin-top: 0;border-bottom: 10px solid #F0F0F0;">
+    <div class="weui-cells weui-cells_checkbox order-list" style="background-color: #FFFFFF;margin-top: 0;border-bottom: 10px solid #F0F0F0;">
         <label class="weui-cell weui-check__label">
-            <div class="weui-cell__hd">
-                <input type="checkbox" class="weui-check" id="checkbox_{{i}}" name="checkbox"
-                       value="{{value.orderNumber}}">
+            <div class="weui-cell__hd haspay">
+                <input type="checkbox" class="weui-check chosen" id="checkbox_{{i}}" name="checkbox"
+                       value="{{value.orderNumber}}" Money="{{value.totalAmount}}"  {{if value.payState==2}} disabled {{/if}}>
                 <i class="weui-icon-checked"></i>
             </div>
             <p style="color: #999;float: left;font-size: 14px;">订单号：{{value.orderNumber}}</p>
             {{if value.payState==1}}
-            <a href="pay_check.html" class="weui-btn weui-btn_disabled weui-btn_mini"
+            <a href="javascript:void(0);" class="weui-btn weui-btn_disabled weui-btn_mini"
                style="position:absolute;color: #fff;background: #2BC17A;right: 15px;top: 10px;">去付款</a>
             {{/if}}
         </label>
@@ -102,7 +102,7 @@
                 <p style="font-size: 14px;color: #07141e;">
                     <span style="">订单金额：</span>
                     <span style="color:  #FF715B;">¥{{value.totalAmount}}</span>
-                    <input type="hidden" id="totalAmount_{{i}}" value="{{value.totalAmount}}"/>
+                    <input type="hidden" class="totalAmount" id="totalAmount_{{i}}" value="{{value.totalAmount}}"/>
                 </p>
                 <p style="color: #07141e;color: #838383;font-size:14px;" class="clearfix">
                     <span style="color: #07141e;color: #838383;font-size:14px;float: left">
@@ -125,17 +125,17 @@
         <div class="clearfix" style="padding: 5px 0;">
             <div class="weui-cell__ft" style="width: 50%; float: left; text-align: center;">
                 <p style="margin-left: 15px;text-align: left;">
-                    已选择<span id="num"></span>个订单
+                    已选择<span id="num" style="color: #2BC17A;"></span>个订单
                 </p>
             </div>
             <div style="float:right;width:50%;">
                 <label style="color: grey;font-size: 14px;"><p>注：单笔不超过10000元</p></label>
             </div>
         </div>
-        <div class="weui-cell__ft" style="width: 50%; float: left; text-align: center;" id="money">
+        <div class="weui-cell__ft" style="width: 50%; float: left; text-align: center;border-top: 1px solid #ddd;" id="money">
             <div class="weui-cell">
-                <p style="float: left; text-align: center;">
-                    合计：¥ <span id="total-money"></span> 元
+                <p style="float: left; text-align: center;color: #333;">
+                    合计：<span style="color: #FE725B;">¥ </span><span id="total-money" style="color: #FE725B;"></span> 元
                 </p>
             </div>
         </div>

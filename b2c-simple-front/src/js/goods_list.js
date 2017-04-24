@@ -1,6 +1,6 @@
 define(['jquery', "components", "common", "template"], function(jquery, components, common, template) {
     $("#index-menu li").eq(1).addClass("active");
-    var apiUrl = "http://localhost:8090/hongbao";
+    var apiUrl = "http://localhost:10001";
     var $goodsList = $("#product-list");
     var $noRec = $('#noRec');
     var $cloading = $('#cloading');
@@ -45,7 +45,7 @@ define(['jquery', "components", "common", "template"], function(jquery, componen
                         if (msg.dataList[i].image !== "") {
                             msg.dataList[i].image = msg.dataList[i].image.split(",");
                             for (var j = 0; j < msg.dataList[i].image.length; j++) {
-                                msg.dataList[i].image[j] = apiUrl + msg.dataList[i].image[j];
+                                msg.dataList[i].image[j] = apiUrlPic + msg.dataList[i].image[j];
                             }
                         }
                         msg.dataList[i].price = msg.dataList[i].price / 100;

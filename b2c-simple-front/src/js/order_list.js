@@ -7,37 +7,43 @@ define(['jquery', "components", "common", "template", "weui"], function (jquery,
     var $loadmore = $("#weui-loadmore"),
         $weuiNone = $("#weui-none");
 
-    var _payState = null;
+    var _payState = '';
     var _paymentId = null;
     var _logisticsState = null;
-    $("#all").bind("click", function () {
-        $(this).addClass("weui-form-preview__btn weui-form-preview__btn_primary")
-            .siblings(".weui-form-preview__btn weui-form-preview__btn_primary")
-            .removeClass("weui-form-preview__btn weui-form-preview__btn_primary");
-        setTimeout(orderList.d(orderList.page, orderList.size), 2000); //模拟延迟取数据
-    });
-    $("#noPay").bind("click", function () {
-        $(this).addClass("weui-form-preview__btn weui-form-preview__btn_primary")
-            .siblings(".weui-form-preview__btn weui-form-preview__btn_primary")
-            .removeClass("weui-form-preview__btn weui-form-preview__btn_primary");;
-        _payState = 1;
-        setTimeout(orderList.d(orderList.page, orderList.size), 2000); //模拟延迟取数据
-    });
-    $("#pay").bind("click", function () {
-        $(this).addClass("weui-form-preview__btn weui-form-preview__btn_primary")
-            .siblings(".weui-form-preview__btn weui-form-preview__btn_primary")
-            .removeClass("weui-form-preview__btn weui-form-preview__btn_primary");;
-        _payState = 2;
-        setTimeout(orderList.d(orderList.page, orderList.size), 2000); //模拟延迟取数据
-    });
+    // $("#all").bind("click", function () {
+    //     $(".weui-navbar a").siblings('.weui-tab__bd-item--active').removeClass('weui-tab__bd-item--active');
+    //     $(this).addClass('weui-tab__bd-item--active');
+    //     setTimeout(orderList.d(orderList.page, orderList.size), 2000); //模拟延迟取数据
+    // });
+    // $("#noPay").bind("click", function () {
+    //     $(".weui-navbar a").siblings('.weui-tab__bd-item--active').removeClass('weui-tab__bd-item--active');
+    //     $(this).addClass('weui-tab__bd-item--active');;
+    //     _payState = 1;
+    //     setTimeout(orderList.d(orderList.page, orderList.size), 2000); //模拟延迟取数据
+    // });
+    // $("#pay").bind("click", function () {
+    //     $(".weui-navbar a").siblings('.weui-tab__bd-item--active').removeClass('weui-tab__bd-item--active');
+    //     $(this).addClass('weui-tab__bd-item--active');
+    //     _payState = 2;
+    //     setTimeout(orderList.d(orderList.page, orderList.size), 2000); //模拟延迟取数据
+    // });
+
+    $('#order-list').on('click','a',function(){
+        _payState = $(this).attr('state');
+        orderList.page=1;
+        $(this).find('div').addClass('active_div').parent().siblings().find('div').removeClass('active_div');
+        setTimeout(orderList.d(orderList.page, orderList.size), 2000);
+    })
 
     $("#logisticsState").change(function(){
         _logisticsState = $("#logisticsState").val();
+        orderList.page=1;
         setTimeout(orderList.d(orderList.page, orderList.size), 2000); //模拟延迟取数据
     });
 
     $("#paymentId").change(function(){
         _paymentId = $("#paymentId").val();
+        orderList.page=1;
         setTimeout(orderList.d(orderList.page, orderList.size), 2000); //模拟延迟取数据
     });
     var orderList = {
@@ -64,8 +70,7 @@ define(['jquery', "components", "common", "template", "weui"], function (jquery,
 
         //异步获取商品列表
         d: function (page, size) {
-            var dataJson;
-            dataJson = {
+            var dataJson = {
                 "payState":_payState,
                 "paymentId":_paymentId,
                 "logisticsState":_logisticsState,
@@ -109,6 +114,7 @@ define(['jquery', "components", "common", "template", "weui"], function (jquery,
                     }
                     $loadmore.hide(); //隐藏加载框
                 } else {
+                    $orderList.html('');
                     $weuiNone.show();
                     $loadmore.hide();
                 }

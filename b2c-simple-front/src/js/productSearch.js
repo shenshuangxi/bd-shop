@@ -213,23 +213,24 @@ define(['jquery', "components","bootstrap", "common", "template"], function(jque
      function settleAccounts(){
 		 var totalNumber=document.getElementById("totalNumber").innerHTML;
 		 var differencePrice=(totalNumber*100-settleAccountsPrice*100)/100;
+		 differencePrice=parseFloat(differencePrice.toFixed(2)); 
 		 if(parseInt(-differencePrice)==parseInt(settleAccountsPrice)){
 			 document.getElementById("settle_accounts").innerHTML=settleAccountsPrice+"起送";
 			 document.getElementById("settle_accounts").removeAttribute('href');
-			 document.getElementById("settle_accounts").style.backgroundColor = "#EEEAFA";
-			 document.getElementById("settle_accounts").style.fontSize ="18px";
+			 document.getElementById("settle_accounts").style.backgroundColor = "#CCC";
+			 // document.getElementById("settle_accounts").style.fontSize ="18px";
 		 }
 		 else if(differencePrice>=0){
 			 document.getElementById("settle_accounts").innerHTML="结算";
-			 document.getElementById("settle_accounts").style.backgroundColor = "#2CC17B";
+			 document.getElementById("settle_accounts").style.backgroundColor = "#2CC27B";
 			 document.getElementById("settle_accounts").setAttribute('href','/page/order_submit.html'); 
-			 document.getElementById("settle_accounts").style.fontSize ="18px";
+			 // document.getElementById("settle_accounts").style.fontSize ="18px";
 			 
 		 }else{
 			 document.getElementById("settle_accounts").innerHTML="还差"+(differencePrice*(-1))+"配送";
 			 document.getElementById("settle_accounts").removeAttribute('href');
-			 document.getElementById("settle_accounts").style.backgroundColor = "#EEEAFA";
-			 document.getElementById("settle_accounts").style.fontSize ="14px";
+			 document.getElementById("settle_accounts").style.backgroundColor = "#CCC";
+			 // document.getElementById("settle_accounts").style.fontSize ="14px";
 		 }
 	 } 
 
@@ -387,18 +388,28 @@ define(['jquery', "components","bootstrap", "common", "template"], function(jque
             $searchBar.addClass('weui-search-bar_focusing');
             $searchInput.focus();
         });
+		var chineseInput=false;//中文输入判断，true表示输入中，false表示输入结束
         $searchInput
             .on('blur', function () {
                 if(!this.value.length) cancelSearch();
             })
             .on('input', function(){
-                if(this.value.length) {
+                if(this.value.length) {	
+					if(chineseInput){
+						return;
+					}				
 					oldgoodsname=$("#searchInput").val();
 					goodsList.getMore(true,$("#searchInput").val());
                     $searchResult.show();
                 } else {
                     $searchResult.hide();
                 }
+            }).on('compositionstart', function () {
+				//中文输入开始
+                chineseInput=true;
+            }).on('compositionend', function () {
+				//中文输入结束
+                chineseInput=false;
             });
 		 
         $searchClear.on('click', function(){

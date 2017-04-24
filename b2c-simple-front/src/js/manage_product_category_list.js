@@ -114,35 +114,35 @@ define(['jquery', "template", "components", "bootstrap", "manageCommon"], functi
                 });
             });
         });
-
-        $("#table-list-content").on("click", ".showorhidechildcategory", function() {
-            var categoryId=$(this).attr("god");
-            var src=this.src;
-            if(src.indexOf("add")>0){
-                src=src.substring(0,src.indexOf("add"))+"substact.png";
-                this.src=src;//"/src/image/substact.png";
-            }else{
-                src=src.substring(0,src.indexOf("substact"))+"add.png";
-                this.src=src;//"/src/image/substact.png";
-                //this.src="/src/image/add.png";
-                document.getElementById('child_'+categoryId).style.display = "none";
-                document.getElementById('child_table_'+categoryId).innerHTML = '';
-                return;
-            }
+		
+		$("#table-list-content").on("click", ".showorhidechildcategory", function() {
+			var categoryId=$(this).attr("god");
+			var src=this.src;
+			if(src.indexOf("add")>0){
+				src=src.substring(0,src.indexOf("add"))+"substact.png";
+				this.src=src;//"/src/image/substact.png";
+			}else{
+				src=src.substring(0,src.indexOf("substact"))+"add.png";
+				this.src=src;//"/src/image/substact.png";
+				//this.src="/src/image/add.png";
+				document.getElementById('child_'+categoryId).style.display = "none";
+				document.getElementById('child_table_'+categoryId).innerHTML = '';
+				return;
+			}
             var url = apiUrl + "/admin/productcategory/productcategory/getAllNormalChildCategoryByCategoryId?categoryId="+categoryId;
             components.getMsg(url).done(function(msg) {
-                if (msg.res == 1) {
-                    msg.dataList=msg.obj;
-                    for (var j = 0; j < msg.dataList.length; j++) {
-                        msg.dataList[j].createTime = components.formatDate(msg.dataList[j].createTime);
-                    }
-                    var html = template('child_table_tp', msg);
-                    document.getElementById('child_table_'+categoryId).innerHTML = html;
-                    document.getElementById('child_'+categoryId).style.display = "";
-                } else {
-                    components.Alert("", "删除失败");
+            if (msg.res == 1) {
+				msg.dataList=msg.obj;
+				 for (var j = 0; j < msg.dataList.length; j++) {
+                    msg.dataList[j].createTime = components.formatDate(msg.dataList[j].createTime);
                 }
-            });
+                        var html = template('child_table_tp', msg);
+						document.getElementById('child_table_'+categoryId).innerHTML = html;
+						document.getElementById('child_'+categoryId).style.display = "";
+                    } else {
+                        components.Alert("", "删除失败");
+                    }
+                });
         });
     }
 });

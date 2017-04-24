@@ -1,6 +1,4 @@
-/**
- * Created by lenovo on 2017/4/5.
- */
+
 define(['jquery', "components", "bootstrap", "manageCommon"], function(jquery, components, bootstrap, manageCommon) {
     getModules();
     function getModules() {

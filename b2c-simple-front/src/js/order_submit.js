@@ -1,6 +1,7 @@
 define(['jquery', "components","bootstrap", "common","timepicker", "template", "weui"], function (jquery, components, bootstrap,common,timepicker, template, weui) {
     var orderNumber = components.GetQueryString("id");
     var totalAmount = "";
+    var mark=false;
     template.helper('formatPrice', function (price, type) {
         if (price || price == 0) {
             price = price / 100;
@@ -18,7 +19,7 @@ define(['jquery', "components","bootstrap", "common","timepicker", "template", "
     getDefaultAddress();
     getPayment();
     getGoods();
-
+  
     $("#order_submit").click(function () {
         var url = apiUrl + "/front/order/order/addOrder";
         var receiveId = $("#receiveId").val();
@@ -39,7 +40,15 @@ define(['jquery', "components","bootstrap", "common","timepicker", "template", "
         //}
         var data=$("#order-submit-box").serialize();
         var sendTime=$("#showSendTime").val();
-        if(getStrLength(sendTime)==0){
+        $(".payStyle").each(function(){
+                if($(this).is(":checked")){
+                    mark = true;
+                }
+            })
+        if(!mark){
+           $.toast("请选择付款方式", "text");
+        }
+        else if(getStrLength(sendTime)==0){
             $.toast("请选择配送时间", "text");
         }else{
             components.getMsg(url, data, "post").done(function (msg) {
@@ -56,6 +65,8 @@ define(['jquery', "components","bootstrap", "common","timepicker", "template", "
                     }else{
                         window.location.href = '/page/order_submit_success.html';
                     }
+                }else{
+                       $.toast("出错啦！", "text");
                 }
             });
         }
@@ -64,34 +75,34 @@ define(['jquery', "components","bootstrap", "common","timepicker", "template", "
     function getStrLength(str) {
         return str.replace(/[^\x00-xff]/g, "xx").length;
     }
-    function getData() {
-        getDefaultAddress();
-        getPayment();
-        /*components.getMsg(apiUrl + "/front/receive/receive/queryDefaultReceive").done(function(msg) {
-         var res = msg.res;
-         if (res == 1) {
-         //msg = msg.obj;
-         var html = template('order-address-tpl', msg);
-         document.querySelector("#order-address").innerHTML = html;
-         //html = template('order-payment-tpl', msg);
-         //document.querySelector("#order-payment").innerHTML = html;
-         //html = template('order-goods-tpl', msg);
-         //document.querySelector("#order-goods").innerHTML = html;
-         //html = template('order-amount-tpl', msg);
-         //document.querySelector("#order-amount").innerHTML = html;
-         //html = template('order-amount2-tpl', msg);
-         //document.querySelector("#order-amount2").innerHTML = html;
-         //html = template('order-commont-tpl', msg);
-         //document.querySelector("#order-commont").innerHTML = html;
-         //html = template('order-invoiceTag-tpl', msg);
-         //document.querySelector("#order-invoiceTag").innerHTML = html;
-         totalAmount = msg.totalAmount;
-         $("#to-pay").click(function() {
-         window.location.href = '/page/pay_check.html?orderNumber=' + orderNumber + '&price=' + totalAmount/100;
-         });
-         }*/
-        //});
-    }
+    // function getData() {
+    //     getDefaultAddress();
+    //     getPayment();
+    //     /*components.getMsg(apiUrl + "/front/receive/receive/queryDefaultReceive").done(function(msg) {
+    //      var res = msg.res;
+    //      if (res == 1) {
+    //      //msg = msg.obj;
+    //      var html = template('order-address-tpl', msg);
+    //      document.querySelector("#order-address").innerHTML = html;
+    //      //html = template('order-payment-tpl', msg);
+    //      //document.querySelector("#order-payment").innerHTML = html;
+    //      //html = template('order-goods-tpl', msg);
+    //      //document.querySelector("#order-goods").innerHTML = html;
+    //      //html = template('order-amount-tpl', msg);
+    //      //document.querySelector("#order-amount").innerHTML = html;
+    //      //html = template('order-amount2-tpl', msg);
+    //      //document.querySelector("#order-amount2").innerHTML = html;
+    //      //html = template('order-commont-tpl', msg);
+    //      //document.querySelector("#order-commont").innerHTML = html;
+    //      //html = template('order-invoiceTag-tpl', msg);
+    //      //document.querySelector("#order-invoiceTag").innerHTML = html;
+    //      totalAmount = msg.totalAmount;
+    //      $("#to-pay").click(function() {
+    //      window.location.href = '/page/pay_check.html?orderNumber=' + orderNumber + '&price=' + totalAmount/100;
+    //      });
+    //      }*/
+    //     //});
+    // }
 
     function getDefaultAddress() {
         components.getMsg(apiUrl + "/front/receive/receive/queryDefaultReceive").done(function (msg) {
@@ -103,7 +114,6 @@ define(['jquery', "components","bootstrap", "common","timepicker", "template", "
             }
         });
     }
-
     function getPayment() {
         components.getMsg(apiUrl + "/front/payment/payment/queryUserPayment").done(function (msg2) {
             var res = msg2.res;

@@ -206,7 +206,7 @@ define(["jquery", "components", "bootstrap", "manageCommon", "jqueryValidate","h
                         connectorColor: '#000000',
                         formatter: function() {
                             //当数子不是整数，百分比显示位数有十多位，进行保留两位小数处理
-                            return changeTwoDecimal(this.percentage) +' %';
+                            return  '<b>'+ this.point.name +'</b>:'+ changeTwoDecimal(this.percentage) +' %';
                         }
                     } ,
                     showInLegend: false
@@ -280,7 +280,7 @@ define(["jquery", "components", "bootstrap", "manageCommon", "jqueryValidate","h
                         connectorColor: '#000000',
                         formatter: function() {
                             //当数子不是整数，百分比显示位数有十多位，进行保留两位小数处理
-                            return changeTwoDecimal(this.percentage) +' %';
+                            return  '<b>'+ this.point.name +'</b>:'+ changeTwoDecimal(this.percentage) +' %';
                         }
                     } ,
                     showInLegend: false

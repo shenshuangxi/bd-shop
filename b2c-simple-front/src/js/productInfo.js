@@ -14,7 +14,7 @@ define(['jquery', "components", "common", "template",, "swiper"], function(jquer
                         if (msg.goodsDataList[pid].image !== "") {
                             msg.goodsDataList[pid].image = msg.goodsDataList[pid].image.split(",");
                             for (var j = 0; j < msg.goodsDataList[pid].image.length; j++) {
-                                msg.goodsDataList[pid].image[j] = apiUrlPic + msg.goodsDataList[pid].image[j];
+                                msg.goodsDataList[pid].image[j] = apiUrl + msg.goodsDataList[pid].image[j];
                             }
                         }
 						//处理起步价
@@ -235,19 +235,19 @@ define(['jquery', "components", "common", "template",, "swiper"], function(jquer
      function settleAccounts(){
 		 var totalNumber=document.getElementById("totalNumber").innerHTML;
 		 var differencePrice=(totalNumber*100-settleAccountsPrice*100)/100;
-		 //alert(document.getElementById("settle_accounts").innerHTML);
+		 differencePrice=parseFloat(differencePrice.toFixed(2)); 
 		 if(differencePrice>=0){
 			 document.getElementById("settle_accounts").innerHTML="结算";
 			 document.getElementById("settle_accounts").style.backgroundColor = "#2CC17B";
 			 document.getElementById("settle_accounts").setAttribute('href','/page/order_submit.html'); 
-			 document.getElementById("settle_accounts").style.fontSize ="16px";
+			 // document.getElementById("settle_accounts").style.fontSize ="16px";
 			 
 		 }else{
-			 document.getElementById("settle_accounts").innerHTML="还差"+(differencePrice*(-1));
+			 document.getElementById("settle_accounts").innerHTML="还差¥"+(differencePrice*(-1));
 			 document.getElementById("settle_accounts").removeAttribute('href');
-             document.getElementById("settle_accounts").style.color = "#A9A9AA";
-			 document.getElementById("settle_accounts").style.backgroundColor = "#535355";
-			 document.getElementById("settle_accounts").style.fontSize ="16px";
+            // document.getElementById("settle_accounts").style.color = "#A9A9AA";
+			 document.getElementById("settle_accounts").style.backgroundColor = "#C6C6C6";
+			 // document.getElementById("settle_accounts").style.fontSize ="16px";
 		 }
 	 } 
 

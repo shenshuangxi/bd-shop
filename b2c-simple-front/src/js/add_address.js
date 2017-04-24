@@ -63,7 +63,8 @@ define(['jquery', "components", "common", "weui", "cityPicker", "template"], fun
                     var res = msg.res;
                     if (res == 1) {
                         $.toast(text, "text", function() {
-                            location.href=document.referrer;
+                            window.history.go(-1);
+                            // window.location="/page/address_list.html"
                         });
                     }
                 });

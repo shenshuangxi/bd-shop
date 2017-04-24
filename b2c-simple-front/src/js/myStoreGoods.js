@@ -1,5 +1,5 @@
 define(['jquery', "components", "common", "template"], function(jquery, components, common, template) {
-	var imgUrl =apiUrlPic;
+	var imgUrl =apiUrl;
 	var addordeleteLock=false;//同一规格加减改操作锁，true表示锁住了 	 
 	   //商品规格增删改同一接口
 	 //商品只有一个规格时增删改数量	 operateType 1增 2删 3改; priceId 规格id;
@@ -274,12 +274,15 @@ define(['jquery', "components", "common", "template"], function(jquery, componen
 					};	
 					if(msg.goodsDataList != undefined && msg.goodsDataList.length>0){
 						$('#firstLoadNodata').hide();			
+					}else if(msg.goodsDataList == undefined &&goodsList.page == 1){
+						//加载第一页就没有数据，则显示没有收藏商品
+						$('#firstLoadNodata').show();	
 					}
                 } else {
                     $noRec.hide();
                     $cloading.hide();
                 }
-				goodsList.isLoading = false;
+				//goodsList.isLoading = false; 
             });
         }
     };

@@ -1,6 +1,6 @@
 
 define(['jquery', "components", "common", "template"], function(jquery, components, common, template) {
-    //var apiUrl = "http://localhost:8080/hongbao";
+
     var $articleList = $("#article-list");
     var $noRec = $('#noRec');
     var $cloading = $('#cloading');

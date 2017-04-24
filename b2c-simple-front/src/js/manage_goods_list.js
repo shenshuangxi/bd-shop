@@ -1,4 +1,6 @@
 define(['jquery', "template","components", "bootstrap", "jqueryValidate","paginator","manageCommon"], function(jquery, template,components, bootstrap, jqueryValidate,paginator,manageCommon) {
+
+   var searchData="";//全局变量，保存搜索条件，点击搜索时赋值
     getModules();
     function getModules() {
         var flag1 = false;
@@ -186,9 +188,11 @@ define(['jquery', "template","components", "bootstrap", "jqueryValidate","pagina
         $("#cloading").removeClass("hidden");
        var pageSize=10;
 		var data = $("#form-box").serialize();	
-			data=data+"&pageNo="+pageNo+"&pageSize="+pageSize;
+			data=data+"&pageSize="+pageSize;
 		var isMarketable= $("#isMarketable").val();
 				data=data+"&isMarketable="+isMarketable;
+        searchData=data;
+        data=data+"&pageNo="+pageNo;
         var url = listUrl;
         components.getMsg(url, data, "post").done(function(msg) {
             var res = msg.res;
@@ -221,10 +225,8 @@ define(['jquery', "template","components", "bootstrap", "jqueryValidate","pagina
                     }, //点击事件，用于通过Ajax来刷新整个list列表
                     onPageClicked: function(event, originalEvent, type, page) {
                         $("#cloading").removeClass("hidden");
-						var data = $("#form-box").serialize();	
-							data=data+"&pageNo="+page+"&pageSize="+pageSize;
-						var isMarketable= $("#isMarketable").val();
-							data=data+"&isMarketable="+isMarketable;
+						var data = searchData;
+                        data=data+"&pageNo="+page;
                         components.getMsg(url, data, "post").done(function(msg) {
                             render(msg.obj);
                         });

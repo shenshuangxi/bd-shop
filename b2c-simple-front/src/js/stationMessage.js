@@ -14,8 +14,8 @@ define(['jquery', "components", "common", "template"], function (jquery, compone
                     readedMsgCount = msg.list[0] > 0 ? msg.list[0] : 0;
                     noReadMsgCount = msg.list[1] > 0 ? msg.list[1] : 0;
                 }
-                $("#noReadNar").text("未读消息（" + noReadMsgCount + "）");
-                $("#readedNar").text("已读消息（" + readedMsgCount + "）");
+                $("#noReadNarBtn").text("未读消息（" + noReadMsgCount + "）");
+                $("#readNarBtn").text("已读消息（" + readedMsgCount + "）");
             });
         }
 
@@ -99,26 +99,28 @@ define(['jquery', "components", "common", "template"], function (jquery, compone
 // });
 
         var flag = false;
-        if(!flag){
+        if (!flag) {
             msgList.getMore(false);
             flag = true;
         }
 
         $("#noReadNar").click(function () {
-            //$(".weui-navbar a").siblings('.weui-bar__item--on').removeClass('weui-bar__item--on');
-            //$(this).addClass('weui-bar__item--on');
+            $(".weui-navbar a").siblings('.weui-tab__bd-item--active').removeClass('weui-tab__bd-item--active');
+            $(this).addClass('weui-tab__bd-item--active');
             state = 2;
+            msgList.isLoading = false;
             msgList.getMore(true);
         });
         //
         $("#readedNar").click(function () {
-            //$(".weui-navbar a").siblings('.weui-bar__item--on').removeClass('weui-bar__item--on');
-            //$(this).addClass('select');
+            $(".weui-navbar a").siblings('.weui-tab__bd-item--active').removeClass('weui-tab__bd-item--active');
+            $(this).addClass('weui-tab__bd-item--active');
             //$(this).siblings('.weui-bar__item--on').removeClass('weui-bar__item--on');
             state = 1;
+            msgList.isLoading = false;
             msgList.getMore(true);
         });
-        
+
         function addActiveClass() {
             $(".weui-tabbar a").removeClass("weui-bar__item_on");
             $(".weui-tabbar a:eq(2)").addClass("weui-bar__item_on");
@@ -127,11 +129,11 @@ define(['jquery', "components", "common", "template"], function (jquery, compone
         $("#msg-list").on("click", ".send-modal", function () {
             var _url = $(this).attr("url");
             var _userMsgId = $(this).attr("userMsgId");
-            var _id=$(this).attr("id");
-            if(_url.length > 0){
+            var _id = $(this).attr("id");
+            if (_url.length > 0) {
                 url = _url;
             } else {
-                url = "/page/stationMessageInfo.html?id="+ _id + "&userMessageId=" + _userMsgId;
+                url = "/page/stationMessageInfo.html?id=" + _id + "&userMessageId=" + _userMsgId;
             }
             window.location.href = url;
         });

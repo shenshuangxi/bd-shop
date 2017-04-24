@@ -6,13 +6,11 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <title>个人账户</title>
+    <title>个人中心</title>
     <link href="/src/image/favicon.ico" type="image/x-icon" rel=icon>
     <link href="/src/image/favicon.ico" type="image/x-icon" rel="shortcut icon">
-
     <link rel="stylesheet" href="/src/font/iconfont.css">
     <link rel="stylesheet" href="/src/libs/weui.min.css">
-
     <link rel="stylesheet" href="/src/libs/jquery-weui.min.css">
     <!-- build:css -->
     <link rel="stylesheet" href="/css/style.css">
@@ -27,6 +25,14 @@
             border: none;
         }
 
+        .icon {
+            width: 1em;
+            height: 1em;
+            vertical-align: -0.15em;
+            fill: currentColor;
+            overflow: hidden;
+        }
+
         * {
             font-family: -apple-system-font, "Helvetica Neue", Helvetica, sans-serif;
         }
@@ -39,7 +45,7 @@
     <script id="user-info-tpl" type="text/html">
         <a href="/page/personalAcc.html">
             <div class="weui-msg__icon-area" style="margin-bottom: 0;">
-                <img class="weui-icon-1" class="img" style="width: 50px;height: 50px;border-radius: 50%;"
+                <img  onerror="javascript:this.src='/src/image/defaulr_portrait.png '" class="weui-icon-1" class="img" style="width: 50px;height: 50px;border-radius: 50%;"
                      src="{{headimgurl}}">
             </div>
             <div class="weui-msg__text-area">
@@ -51,30 +57,31 @@
         </a>
     </script>
 </div>
-<div class="weui-cells page__category-content" style="margin-top: 0;border-top: 10px solid #F0F0F0;font-family: -apple-system-font, "Helvetica Neue", Helvetica, sans-serif;">
-    <a class="weui-cell weui-cell_access js_item" data-id="button" href="/page/myStoreGoods.html">
-        <img src="/src/image/i_03.png" alt="" style="width:20px;height:20px">
-        <div class="weui-cell__bd">
-            <p>&nbsp;&nbsp;&nbsp;我的商品收藏</p>
-        </div>
-        <div class="weui-cell__ft"></div>
-    </a>
-    <a class="weui-cell weui-cell_access js_item" data-id="input" href="/page/order_list.html">
-        <img src="/src/image/i_07.png" alt="" style="width:20px;height:20px">
-        <div class="weui-cell__bd">
-            <p>&nbsp;&nbsp;&nbsp;我的订单</p>
-        </div>
-        <div class="weui-cell__ft"></div>
-    </a>
-    <a class="weui-cell weui-cell_access js_item" data-id="list" href="/page/order_settle_list.html">
-        <img src="/src/image/i_09.png" alt="" style="width:20px;height:20px">
-        <div class="weui-cell__bd">
-            <p>&nbsp;&nbsp;&nbsp;一键结算订单</p>
-        </div>
-        <div class="weui-cell__ft"></div>
-    </a>
+<div class="weui-cells page__category-content" style="margin-top: 0;border-top: 20px solid #F0F0F0;font-family: -apple-system-font, " Helvetica Neue
+", Helvetica, sans-serif;">
+<a class="weui-cell weui-cell_access js_item" data-id="button" href="/page/myStoreGoods.html">
+    <img src="/src/image/i_03.png" alt="" style="width:20px;height:20px">
+    <div class="weui-cell__bd">
+        <p>&nbsp;&nbsp;&nbsp;我的商品收藏</p>
+    </div>
+    <div class="weui-cell__ft"></div>
+</a>
+<a class="weui-cell weui-cell_access js_item" data-id="input" href="/page/order_list.html">
+    <img src="/src/image/i_07.png" alt="" style="width:20px;height:20px">
+    <div class="weui-cell__bd">
+        <p>&nbsp;&nbsp;&nbsp;我的订单</p>
+    </div>
+    <div class="weui-cell__ft"></div>
+</a>
+<a class="weui-cell weui-cell_access js_item" data-id="list" href="/page/order_settle_list.html">
+    <img src="/src/image/i_09.png" alt="" style="width:20px;height:20px">
+    <div class="weui-cell__bd">
+        <p>&nbsp;&nbsp;&nbsp;一键结算订单</p>
+    </div>
+    <div class="weui-cell__ft"></div>
+</a>
 </div>
-<div class="weui-cells page__category-content" style="margin-top: 0;border-top: 10px solid #F0F0F0;">
+<div class="weui-cells page__category-content" style="margin-top: 0;border-top: 20px solid #F0F0F0;">
     <a class="weui-cell weui-cell_access js_item" data-id="button" href="/page/address_list.html">
         <img src="/src/image/i_11.png" alt="" style="width:20px;height:20px">
         <div class="weui-cell__bd">
@@ -90,9 +97,7 @@
         <div class="weui-cell__ft"></div>
     </a>
 </div>
-<!--<div class="weui-cells page__category-content">-->
-<!--<a href="javascript:;" class="weui-btn log-out-btn" style="color: #00CC00" id="logout">退出</a>-->
-<!--</div>-->
+<script type="text/javascript" src="/src/font/iconfont.js"></script>
 <!--include "../public/footer.html"-->
 </body>
 </html>

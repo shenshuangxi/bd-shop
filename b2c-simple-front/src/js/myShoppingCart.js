@@ -1,6 +1,6 @@
 //define(['jquery', "components", "common", "template","zepto"], function(jquery, components, common, template,zepto) {
 define(['zepto', "components", "common", "weui", "touch", "template"], function(zepto, components, common, weui, touch, template) {
-	var imgUrl =apiUrlPic;
+	var imgUrl =apiUrl;
 	var addordeleteLock=false;//同一规格加减改操作锁，true表示锁住了  	 
 	 
 	 //商品规格增删改同一接口
@@ -102,26 +102,27 @@ define(['zepto', "components", "common", "weui", "touch", "template"], function(
      function settleAccounts(){
 		 var totalNumber=document.getElementById("totalNumber").innerHTML;
 		 var differencePrice=(totalNumber*100-settleAccountsPrice*100)/100;
+		 differencePrice=parseFloat(differencePrice.toFixed(2)); 
 		 if(parseInt(-differencePrice)==parseInt(settleAccountsPrice)){
-			 document.getElementById("settle_accounts").innerHTML=settleAccountsPrice+"起送";
+			 document.getElementById("settle_accounts").innerHTML="¥"+settleAccountsPrice+"起送";
 			 document.getElementById("settle_accounts").removeAttribute('href');
              document.getElementById("settle_accounts").style.color = "#A9A9AA";
 			 document.getElementById("settle_accounts").style.backgroundColor = "#535355";
-			 document.getElementById("settle_accounts").style.fontSize ="16px";
+			 // document.getElementById("settle_accounts").style.fontSize ="16px";
 		 }
 		 else if(differencePrice>=0){
 			 document.getElementById("settle_accounts").innerHTML="结算";
 			 document.getElementById("settle_accounts").style.backgroundColor = "#2CC17B";
              document.getElementById("settle_accounts").style.color = "#fff";
 			 document.getElementById("settle_accounts").setAttribute('href','/page/order_submit.html'); 
-			 document.getElementById("settle_accounts").style.fontSize ="16px";
+			 // document.getElementById("settle_accounts").style.fontSize ="16px";
 			 
 		 }else{
-			 document.getElementById("settle_accounts").innerHTML="还差"+(differencePrice*(-1))+"配送";
+			 document.getElementById("settle_accounts").innerHTML="还差¥"+(differencePrice*(-1))+"配送";
 			 document.getElementById("settle_accounts").removeAttribute('href');
              document.getElementById("settle_accounts").style.color = "#A9A9AA";
 			 document.getElementById("settle_accounts").style.backgroundColor = "#535355";
-			 document.getElementById("settle_accounts").style.fontSize ="16px";
+			 // document.getElementById("settle_accounts").style.fontSize ="16px";
 		 }
 	 } 
 

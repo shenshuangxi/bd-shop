@@ -1,8 +1,7 @@
 var apiUrl = "http://localhost:10001/", //配置全局api请求域名
     listUrl = "",
     // apiUrlPic = "http://localhost:10001/";
-apiUrlPic = "http://localhost:10002/";
-
+    apiUrlPic = "http://localhost:10002/";
 var settleAccountsPrice=500;//设置商品起送价格
 if (navigator.appName == "Microsoft Internet Explorer" && navigator.appVersion.split(";")[1].replace(/[ ]/g, "") == "MSIE6.0" || navigator.appName == "Microsoft Internet Explorer" && navigator.appVersion.split(";")[1].replace(/[ ]/g, "") == "MSIE7.0" || navigator.appName == "Microsoft Internet Explorer" && navigator.appVersion.split(";")[1].replace(/[ ]/g, "") == "MSIE8.0" || navigator.appName == "Microsoft Internet Explorer" && navigator.appVersion.split(";")[1].replace(/[ ]/g, "") == "MSIE9.0") {
     alert("您的浏览器版本过低，请下载IE9以上版本或使用其他浏览器");
@@ -36,7 +35,10 @@ requirejs.config({
         event:"/src/libs/event",
         touch:"/src/libs/touch",
         fastclick:"/src/libs/fastclick",
-		highcharts:"/src/libs/highcharts"
+		highcharts:"/src/libs/highcharts",
+        hammer:"/src/libs/hammer.min",
+        updown:"/src/libs/updown",
+        lazyImg:'/src/libs/lazyimg'
     },
     shim: {
         paginator: ["jquery"],

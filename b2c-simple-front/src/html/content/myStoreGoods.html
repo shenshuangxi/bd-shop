@@ -22,8 +22,8 @@
         }
 
         .show_goods_price_list .weui-number-input {
-            border: none;
-            color: #FF735C;
+            /*border: none;*/
+            /*color: #FF735C;*/
         }
 
         .show_goods_price_list:before {
@@ -47,7 +47,7 @@
                         <div class="weui-loadmore weui-loadmore hide" id="noRec">
                             <span class="weui-loadmore__tips">暂无数据</span>
                         </div>
-                        <div class="weui-loadmore weui-loadmore weui-loadmore_dot  hide" id="cloading">
+                        <div class="weui-loadmore weui-loadmore weui-loadmore_dot hide" id="cloading">
                             <span class="weui-loadmore__tips">加载更多</span>
                         </div>
                     </div>
@@ -60,7 +60,7 @@
                         class="weui-badge" style="position: absolute;top: 0.1em;right: 1.4em;"
                         id="totalCategory">8</span> </a>
                 <a href="javascript:;" class="weui-tabbar__item weui-bar__item_on"><p
-                        style="font-size:15px;color:#FF0000"><font color="#FF0000">￥<label id="totalNumber">0.00</label></font>
+                        style="font-size:15px;color:#FF0000"><font color="#FF0000">¥<label id="totalNumber">0.00</label></font>
                 </p></a>
                 <a href="javascript:;" class="weui-tabbar__item weui-bar__item_on"> </a>
                 <a href="/page/order_submit.html" class="weui-btn weui-btn_primary "
@@ -88,7 +88,7 @@
                              style="display: block;  width: 24px;  height: 24px;">
                     </div>
                     <input pattern="[0-9]*" class="weui-number-input"
-                           style="text-align:center;width: 30px; display: block;margin: 0 auto;"
+                           style="text-align:center;width: 30px; display: block;margin: 0 auto;font-size: initial;"
                            value="{{value.buyPrice}}" id="edit_{{value.priceId}}" data-min="0" data-max="9999"
                            data-step="1">
                     <div class="user-number user-number-plus">
@@ -101,7 +101,7 @@
     </li>
     {{/each}}
 </script>
-<div class="weui-loadmore weui-loadmore" id="firstLoadNodata">
+<div class="weui-loadmore weui-loadmore hide" id="firstLoadNodata">
     <span class="weui-loadmore__tips">暂时没有收藏商品</span>
 </div>
 
@@ -117,7 +117,7 @@
                         <img src="{{value.image[0]}}" alt="" style="display: block; width: 54px;">
                     </div>
                     <div class="weui-cell__bd" style="line-height: normal;">
-                        <p style="font-size:16px;"><label>{{value.goodsName}}</label></p>
+                        <p style="font-size:16px;margin-top: -5px;"><label>{{value.goodsName}}</label></p>
                         <p style="font-size:14px;"><label style="font-size:12px;color: #FF735C;">¥</label><label
                                 style="font-size:14px;color: #FF735C;" id="one_retailPrice_{{value.vo_priceId}}">{{value.vo_retailPrice}}</label>起
                         </p>
@@ -134,7 +134,7 @@
                              style="display: none;  width: 24px;  height: 24px;">
                     </div>
                     <input pattern="[0-9]*" class="weui-number-input"
-                           style="text-align:center;width: 30px; display: none;" value="{{value.vo_shoppingCartNum}}"
+                           style="text-align:center;width: 30px; display: none;font-size: initial;" value="{{value.vo_shoppingCartNum}}"
                            id="one_edit_{{value.vo_priceId}}" data-min="0" data-max="9999" data-step="1">
                     <div class="user-number user-number-plus">
                         <img src="/src/image/add.png" id="one_add_{{value.vo_priceId}}"
