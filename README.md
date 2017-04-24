@@ -30,7 +30,7 @@ BDShop商城系统是B2C模式的电子商城
 
 ![输入图片说明](https://git.oschina.net/uploads/images/2017/0424/121956_2d6f6900_127930.jpeg "在这里输入图片标题")
 
-捐赠：
+##捐赠 金额随意：
 ![输入图片说明](https://git.oschina.net/uploads/images/2017/0424/145453_3d03f160_127930.png "在这里输入图片标题")
 
 
