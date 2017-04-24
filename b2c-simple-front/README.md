@@ -4,7 +4,10 @@
    jquery，artTemplate，require，gulp，sass
 
 ## 注意事项
-   1、使用该项目时请先安装gulp：1、下载安装node.js; 2、在本目录下运行以下命令：
+   1、使用该项目时请先安装gulp：
+   
+   1、下载安装node.js;
+   2、在本目录下运行以下命令：
    $ npm install -g cnpm --registry=https://registry.npm.taobao.org
    $ npm install -g gulp 
    $ cnpm install
