@@ -191,7 +191,7 @@
 			<result column="image_url" property="imageUrl" jdbcType="VARCHAR" />
 			<result column="create_time" property="orderNumber" jdbcType="VARCHAR" />
 			<result column="update_time" property="orderNumber" jdbcType="VARCHAR" />
-			<association property="admin" javaType="com.bigdatan.b2c.entity.admin.Admin">
+			<association property="admin" javaType="com.bigdatan.b2c.entity.Admin">
 				<id column="admin_id" property="adminId" jdbcType="INTEGER" />
 				<result column="admin_name" property="adminName" jdbcType="VARCHAR" />
 			</association>
