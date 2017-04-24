@@ -3,8 +3,8 @@
 > BDShop 
 
 ------------------------------------------------
-## BDShop 系统简介
 BDShop是国内少有前后端完全分离的java商城项目.
+## BDShop 系统简介
 BDShop商城系统是B2C模式的电子商城
 后端基于springboot
 前端基于nodejs
