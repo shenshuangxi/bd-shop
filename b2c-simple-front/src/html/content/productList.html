@@ -236,7 +236,8 @@
                             <form class="weui-search-bar__form">
                                 <div class="weui-search-bar__box">
                                     <i class="weui-icon-search"></i>
-                                    <input type="search" class="weui-search-bar__input" id="searchInput" placeholder="搜索商品"
+                                    <input type="search" class="weui-search-bar__input" id="searchInput"
+                                           placeholder="搜索商品"
                                            required=""/>
                                     <a href="javascript:" class="weui-icon-clear" id="searchClear"></a>
                                 </div>
@@ -262,9 +263,9 @@
                                         </script>
                                     </ul>
                                 </div>
-                                <div id="right" class="weui-flex__item">
+                                <div id="right">
                                     <div id="subClass" style="display: block;margin-top: 5px">
-                                        <ul id="show_second_category" class="weui-flex" style="transform: translateX(0px)">
+                                        <ul id="show_second_category" style="transform: translateX(0px)">
                                             <!--展示商品二级分类-->
 
                                         </ul>
@@ -298,12 +299,15 @@
                                                     </a>
                                                 </div>
 
-                                                <div class="weui-cell" style="text-align: right; padding-right: 0px;font-size:10px;">
-                                                    <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default;"
+                                                <div class="weui-cell"
+                                                     style="text-align: right; padding-right: 0px;font-size:10px;">
+                                                    <a href="javascript:;"
+                                                       class="weui-btn weui-btn_mini weui-btn_default;"
                                                        style="color: #fff;background: #2BC17A;border-radius: 20px;"
                                                        id="goodsId_{{value.goodsId}}">选规格</a>
                                                     <div class="user-number user-number-sub">
-                                                        <img src="/src/image/substact.png" id="one_sub_{{value.vo_priceId}}"
+                                                        <img src="/src/image/substact.png"
+                                                             id="one_sub_{{value.vo_priceId}}"
                                                              style="display: none;  width: 24px;  height: 24px;">
                                                     </div>
                                                     <input pattern="[0-9]*" class="weui-number-input"
@@ -324,7 +328,8 @@
                                             </div>
                                         </li>
                                         <li style="list-style-type:none">
-                                            <div id="show_goods_price_list_{{value.goodsId}}" class="weui-cells format-choose"
+                                            <div id="show_goods_price_list_{{value.goodsId}}"
+                                                 class="weui-cells format-choose"
                                                  style="width: 100%;display:none;margin-top: 0;font-size: 14px;">
                                                 <!--  展示规格 -->
                                             </div>
@@ -343,8 +348,9 @@
                         <div class="weui-tabbar" style="bottom: 58px; height:51px;position: fixed;">
                             <a href="javascript:void(0);" class="weui-tabbar__item weui-bar__item_on"
                                style="background: #fff;position: relative;text-align: left;border-top: 1px solid #ddd;">
-                                <p style="position: absolute;left: 80px;top: 16px;font-size:18px;color:#2CC27B;">¥ <label
-                                        id="totalNumber" style="font-weight: normal;">0.00</label>
+                                <p style="position: absolute;left: 80px;top: 16px;font-size:18px;color:#2CC27B;">¥
+                                    <label
+                                            id="totalNumber" style="font-weight: normal;">0.00</label>
                                 </p>
                                 <div style="position: absolute;top: 2px;">
                                     <div style="position: relative;margin-left:15px;background: #FF715B; width: 45px;height: 45px;border-radius: 50%;text-align: center">
