@@ -201,7 +201,7 @@
 		</if>
 	</select>
 	
-	<select id="getPageByOrderDetailsAdminSearchVO" parameterType="ccom.bigdatan.b2c.vo.OrderDetailsAdminSearchVO"
+	<select id="getPageByOrderDetailsAdminSearchVO" parameterType="com.bigdatan.b2c.vo.OrderDetailsAdminSearchVO"
 		resultMap="BaseResultMap">
 		select				
 		<include refid="Base_Column_List" />		
