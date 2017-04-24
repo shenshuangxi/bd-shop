@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <title>商品搜索</title>
+    <link href="/src/image/favicon.ico" type="image/x-icon" rel="icon"/>
+    <link href="/src/image/favicon.ico" type="image/x-icon" rel="shortcut icon"/>
+    <link rel="stylesheet" href="/src/font/iconfont.css"/>
+    <link rel="stylesheet" href="/src/libs/weui.min.css"/>
+    <link rel="stylesheet" href="/src/libs/jquery-weui.min.css"/>
+    <!-- build:css -->
+    <link rel="stylesheet" href="/css/style.css"/>
+    <script id="script" src="/src/libs/require.min.js" defer="" async="true" require-module="./productSearch" data-main="/src/js/config.js"></script>
+    <style type="text/css">
+        .mask {
+            position: absolute;
+            top: 0px;
+            filter: alpha(opacity=60);
+            background-color: #777;
+            z-index: 1002;
+            left: 0px;
+            opacity: 0.5;
+            -moz-opacity: 0.5;
+        }
+
+        .li {
+            list-style-type: none;
+        }
+    </style>
+</head>
+<body ontouchstart="">
+<div class="page">
+    <div class="page__bd">
+        <div class="weui-tab">
+            <div class="weui-tab__panel">
+                <!--<a href="javascript:;" class="weui-btn weui-btn_primary">点击展现searchBar</a>-->
+                <div class="weui-search-bar" id="searchBar">
+                    <!-- <form class="weui-search-bar__form"> -->
+                    <div class="weui-search-bar__box">
+                        <i class="weui-icon-search"></i>
+                        <input type="search" class="weui-search-bar__input" id="searchInput" placeholder="搜索"
+                               required=""/>
+                        <a href="javascript:" class="weui-icon-clear" id="searchClear"></a>
+                    </div>
+                    <label class="weui-search-bar__label" id="searchText"> <i class="weui-icon-search"></i>
+                        <span>搜索</span> </label>
+                    <!-- </form> -->
+                    <a href="javascript:" class="weui-search-bar__cancel-btn" id="searchCancel">取消</a>
+                </div>
+                <div id="searchResult1" style="margin-top: 0px;height:100%">
+                    <div id="show_goods_list" class="weui-flex__item"
+                         style=" margin-top: 0px;">
+                        <div class="weui-cells" style="width: 100%;margin-top: 0px;" id="show_goods_list_search">
+                            <!--展示商品列表-->
+                        </div>
+                        <script type="text/html" id="show_goods_list_search-tp">
+                            {{each goodsDataList as value i}}
+                            <li style="list-style-type:none">
+                                <div class="weui-cell">
+                                    <div class="weui-cell__bd">
+                                        <a class="weui-cell weui-cell_access" href="/page/productInfo.html?id={{value.goodsId}}" style="padding-left: 0;padding-right: 0;">
+                                            <div class="weui-cell__hd">
+                                                <img src="{{value.image[0]}}"
+                                                        alt="" style="display: block;  width: 54px;  height: 54px;">
+                                            </div>
+                                            <div class="weui-cell__bd">
+                                                <p style="font-size:14px;"><label>{{value.goodsName}}</label></p>
+
+                                                <p style="font-size:12px;"><label
+                                                        style="font-size:12px;color: #ff0000;">¥</label><label
+                                                        style="font-size:12px;color: #ff0000;"
+                                                        id="one_retailPrice_{{value.vo_priceId}}">{{value.vo_retailPrice}}</label>起
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="weui-cell__ft">
+                                        <div class="weui-cell"
+                                             style="text-align: right; padding-right: 0px;font-size:10px;">
+                                            <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default;"
+                                               style="color: #666666;display:" id="goodsId_{{value.goodsId}}"
+                                               style="color: #fff;background: #2BC17A;border-radius: 20px;">选择规格</a>
+
+                                            <div class="user-number user-number-sub">
+                                                <img src="/src/image/substact.png" id="one_sub_{{value.vo_priceId}}"
+                                                     style="display: none;  width: 24px;  height: 24px;">
+                                            </div>
+                                            <input pattern="[0-9]*" class="weui-number-input"
+                                                   style="text-align:center;width: 30px; display: none;margin: 0 auto;"
+                                                   value="{{value.vo_shoppingCartNum}}"
+                                                   id="one_edit_{{value.vo_priceId}}"
+
+                                                   data-min="0"
+                                                   data-max="9999"
+                                                   data-step="1">
+
+                                            <div class="user-number user-number-plus">
+                                                <img src="/src/image/add.png" id="one_add_{{value.vo_priceId}}"
+                                                     style="display: none;  width: 24px;  height: 24px;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li style="list-style-type:none">
+                                <div id="show_goods_price_list_{{value.goodsId}}" class="weui-cells"
+                                     style="width: 100%;display:none">
+                                    <!--  展示规格 -->
+
+                                </div>
+                            </li>
+                            {{/each}}
+                        </script>
+                        <div class="weui-loadmore weui-loadmore hide" id="noRec">
+                            <span class="weui-loadmore__tips">暂无数据</span>
+                        </div>
+                        <div class="weui-loadmore weui-loadmore weui-loadmore_dot  hide" id="cloading">
+                            <span class="weui-loadmore__tips">加载更多</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="weui-tabbar" style="bottom: 0px; position: fixed;width:100%">
+                <a href="javascript:;" class="weui-tabbar__item weui-bar__item_on"> <img src="/src/image/shop.png" id="shoppingCartDetail"/> <span class="weui-badge" style="position: absolute;top: 0.1em;left:27px;" id="totalCategory">0</span>
+                </a>
+                <a href="javascript:;" class="weui-tabbar__item weui-bar__item_on"><p style="font-size:15px;color:#FF0000"><font color="#FF0000">¥<label id="totalNumber">0.00</label></font>
+                </p></a>
+                <a href="javascript:;" class="weui-tabbar__item weui-bar__item_on"> </a>
+                <a href="/page/order_submit.html" class="weui-btn weui-btn_primary "
+                   style="width:130px;background-color:#2CC17B;font-size:14px;border-radius: 0;"
+                   id="settle_accounts">结算</a>
+            </div>
+        </div>
+    </div>
+   
+</div>
+<script type="text/html" id="show_goods_price_list-tpl">
+    {{each goodspriceDataList as value i}}
+    <li style="list-style-type:none">
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <p><label style="color: #ff0000;">¥</label><label style="color: #ff0000;" id="retailPrice_{{value.priceId}}">{{value.retailPrice}}</label><label>/{{value.unitName}}</label>
+                </p>
+            </div>
+            <div class="weui-cell__bd">
+                <p><label>&nbsp;</label></p>
+            </div>
+            <div class="weui-cell__ft">
+                <div class="weui-cell" style="padding-left: 0;padding-right: 0;">
+                    <div class="user-number user-number-sub">
+                        <img src="/src/image/substact.png" id="sub_{{value.priceId}}"
+                             style="display: block;  width: 24px;  height: 24px;">
+                    </div>
+                    <input pattern="[0-9]*" class="weui-number-input"
+                           style="text-align:center;width: 30px; display: block;margin: 0 5px;" value="{{value.buyPrice}}"
+                           id="edit_{{value.priceId}}"
+
+                           data-min="0"
+                           data-max="9999"
+                           data-step="1">
+
+                    <div class="user-number user-number-plus">
+                        <img src="/src/image/add.png" id="add_{{value.priceId}}"
+                             style="display: block;  width: 24px;  height: 24px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </li>
+    {{/each}}
+</script>
+</body>
+</html>

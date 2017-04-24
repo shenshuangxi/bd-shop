@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>收货地址管理</title>
+    <link href="/src/image/favicon.ico" type="image/x-icon" rel=icon>
+    <link href="/src/image/favicon.ico" type="image/x-icon" rel="shortcut icon">
+
+    <link rel="stylesheet" href="/src/font/iconfont.css">
+    <link rel="stylesheet" href="/src/libs/weui.min.css">
+    <link rel="stylesheet" href="/src/libs/jquery-weui.min.css">
+    <!-- build:css -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- endbuild -->
+    <script id="script" src="/src/libs/require.min.js" defer async="true" require-module="./address_list" data-main="/src/js/config.js"></script>
+
+</head>
+
+<body class="white-body">
+    <h1 style="font-size:0.8rem;line-height:50px;padding-left:20px;border-bottom: 1px solid #eee;">收货地址管理</h1>
+    <ul class="address-list" id="address-list">
+        <script type="text/html" id="address-list-tpl">
+            {{if obj==null}}
+                <p style="text-align: center">暂无收货地址</p>
+            {{/if}}
+            {{each obj as value i}}
+            <li class="clearfix" rid="{{value.receiveId}}">
+                <div class="fl select hide">
+                    <i class="iconfont icon-selected"></i>
+                </div>
+                <div class="fl text" style="padding-top: 10px;">
+                    <h2>{{value.contact}} / {{value.tel}}</h2>
+                    <p>{{value.receiveProvince}}{{value.receiveCity}}{{value.receiveCounty}} {{value.receiveAddress}}</p>
+                </div>
+                <div class="fr edit">
+                    <a href="/page/add_address.html?id={{value.receiveId}}" class="block">
+                        <i class="iconfont icon-edit"></i>
+                    </a>
+                </div>
+                <div class="fr hide delete" rid="{{value.receiveId}}">
+                    <i class="iconfont icon-delete" rid="{{value.receiveId}}"></i>
+                </div>
+            </li>
+            {{/each}}
+        </script>
+    </ul>
+    <a href="/page/add_address.html" class="weui-btn weui-btn_primary" style="width:90%;margin-top:50px;">添加</a>
+</body>
+
+</html>

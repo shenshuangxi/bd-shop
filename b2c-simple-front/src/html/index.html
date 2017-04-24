@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>首页</title>
+    <link href="/src/image/favicon.ico" type="image/x-icon" rel=icon>
+    <link href="/src/image/favicon.ico" type="image/x-icon" rel="shortcut icon">
+    <link rel="stylesheet" href="/src/libs/weui.min.css"/>
+    <style>
+        * {
+            font-family: -apple-system-font, "Helvetica Neue", Helvetica, sans-serif;
+        }
+
+        body {
+            line-height: normal;
+        }
+
+        .index-info-box:before {
+            border-top: none;
+        }
+
+        .index-info-box:after {
+            border-bottom: none;
+        }
+
+        .weui-grids:before {
+            border-top: none;
+        }
+
+        .classify-header:before {
+            border-top: none;
+        }
+
+        .clearfix:after {
+            content: ".";
+            display: block;
+            height: 0;
+            clear: both;
+            visibility: hidden;
+        }
+
+        .clearfix {
+            *zoom: 1;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .info-list li {
+            padding-right: 15px;
+        }
+
+        .info-list li a {
+            display: block;
+            color: #333;
+            width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            word-wrap: break-word;
+        }
+
+        .index-scroll-info:before {
+            border-top: none;
+        }
+
+        /* 本例子css -------------------------------------- */
+        .slideBox {
+            position: relative;
+            overflow: hidden;
+            /*margin: 10px auto;*/
+            max-width: 560px; /* 设置焦点图最大宽度 */
+        }
+
+        .slideBox .hd {
+            position: absolute;
+            height: 28px;
+            line-height: 28px;
+            bottom: 0;
+            right: 0;
+            z-index: 1;
+        }
+
+        .slideBox .hd li {
+            display: inline-block;
+            width: 5px;
+            height: 5px;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+            background: #333;
+            text-indent: -9999px;
+            overflow: hidden;
+            margin: 0 6px;
+        }
+
+        .slideBox .hd li.on {
+            background: #fff;
+        }
+
+        .slideBox .bd {
+            position: relative;
+            z-index: 0;
+        }
+
+        .slideBox .bd li {
+            position: relative;
+            text-align: center;
+        }
+
+        .slideBox .bd li img {
+            /*background: url(images/loading.gif) center center no-repeat;*/
+            vertical-align: top;
+            width: 100%; /* 图片宽度100%，达到自适应效果 */
+        }
+
+        .slideBox .bd li a {
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        }
+
+        /* 去掉链接触摸高亮 */
+        .slideBox .bd li .tit {
+            display: block;
+            width: 100%;
+            position: absolute;
+            bottom: 0;
+            text-indent: 10px;
+            height: 28px;
+            line-height: 28px;
+            /*background: url(images/focusBg.png) repeat-x;*/
+            color: #fff;
+            text-align: left;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div>
+    <div>
+        <div id="slideBox" class="slideBox">
+            <div class="bd">
+                <ul id="ad_list">
+
+                </ul>
+                <!--<script type="text/html" id="ad_list_tpl">
+                    {{each list as value i}}
+                    <li>
+                        <a class="pic" href="{{value.link}}"><img src='{{value.image | formatImage:"true"}}'/></a>
+                    </li>
+                    {{/each}}
+                </script>-->
+            </div>
+            <div class="hd">
+                <ul>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="weui-cells index-scroll-info" style="margin-top: 0;border-bottom: 10px solid #F0F0F0;" id="msg_list">
+    </div>
+    <script type="text/html" id="msg_list_tpl">
+        {{each list as value i}}
+        <a class="weui-cell weui-cell_access send-modal" href="javascript:;" id="{{value.messageId}}" url="{{value.url}}" userMsgId="{{value.userMessageId}}">
+            <div class="weui-cell__bd" style="width: 100%;">
+                <p style="text-overflow: ellipsis;overflow: hidden;height:18px;font-size: 14px;color: #333;width: 90%;">
+                    <span style="color:#2BC17B;font-size: 14px;">通知：</span>{{value.messageTitle}}</p>
+            </div>
+            <div class="weui-cell__ft">
+            </div>
+        </a>
+        {{/each}}
+    </script>
+    <div class="clearfix" style="position: relative;padding: 10px 0;border-bottom: 10px solid #F0F0F0;">
+        <div style="float: left;width: 30%;text-align: center;border-right: 1px solid #ddd;">
+            <img src="/src/image/safe-test_03.png" alt="" style="width: 40px;height: 40px;">
+
+            <p class="weui-tabbar__label" style="font-size: 16px;color: #333;">安全检测</p>
+        </div>
+        <div style="float: right;width: 69%;" id="article_list">
+
+        </div>
+        <script type="text/html" id="article_list_tp">
+            {{each dataList as value j}}
+            <div style="padding-right: 20px;">
+                <a href="page/safeDetectReport.html?id={{value.articleId}}"
+                   style="display: block;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;color: #333;font-size: 14px;">【{{value.createTime.substring(5,10)}}】{{value.title}}</a>
+            </div>
+            {{/each}}
+
+        </script>
+        <a href="/page/safeDetect.html"
+           style="position: absolute;bottom:10px;right:15px;color: #2FC17E;font-size: 14px;">更多&gt;&gt; </a>
+    </div>
+</div>
+
+
+<div class="weui-cell classify-header">
+    <div class="weui-cell__hd" style="width:45%;">
+        <label class="weui-label_lt" style="color:#FF715D;float:right;font-size: 10px;">———●</label>
+    </div>
+    <div class="weui-cell__bd">
+        <label class="weui-label" style="color:#FF715D;text-align: center;font-size: 18px; ">商品分类</label>
+    </div>
+    <div class="weui-cell__ft" style="width:45%">
+        <label class="weui-label" style="color:#FF715D;float:left;text-align: left;font-size: 10px;">●———</label>
+    </div>
+</div>
+<div class="weui-grids" style="padding-bottom: 20px;">
+    <div id="product-list">
+
+    </div>
+    <script type="text/html" id="product-list-tpl">
+        {{each dataList as value i}}
+        <a href="/page/productList.html?id={{value.categoryId}}" class="weui-grid">
+            <div class="weui-grid__icon" style="width: auto;height: auto;">
+                <img src="{{value.image[0]}}" alt="" style="display: block;width: 80%;margin: 0 auto;">
+            </div>
+            <p class="weui-grid__label" style="color: #666;">{{value.categoryName}}</p>
+        </a>
+        {{/each}}
+    </script>
+</div>
+
+<label class="weui-label"> &nbsp; </label>
+<div class="weui-tabbar" style="bottom: 0px; position: fixed;">
+    <a href="../" class="weui-tabbar__item weui-bar__item_on" style="border-right: 1px solid #ddd;">
+        <img src="/src/image/home-green.png" alt="" class="weui-tabbar__icon" style="height: 28px;width: auto;">
+        <p class="weui-tabbar__label">首页</p>
+    </a>
+    <a href="/page/productList.html" class="weui-tabbar__item" style="border-right: 1px solid #ddd;">
+        <img src="/src/image/product.png" alt="" class="weui-tabbar__icon" style="height: 28px;width: auto;">
+        <p class="weui-tabbar__label">商品</p>
+    </a>
+    <a href="/page/safeDetect.html" class="weui-tabbar__item" style="border-right: 1px solid #ddd;">
+        <img src="/src/image/safe.png" alt="" class="weui-tabbar__icon" style="height: 28px;width: auto;">
+        <p class="weui-tabbar__label">安全监测</p>
+    </a>
+    <a href="/page/personal.html" class="weui-tabbar__item">
+        <img src="/src/image/user.png" alt="" class="weui-tabbar__icon" style="height: 28px;width: auto;">
+        <p class="weui-tabbar__label">个人中心</p>
+    </a>
+</div>
+<script type="text/javascript" src="/src/libs/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/src/libs/TouchSlide.1.1.js"></script>
+<script type="text/javascript" src="/src/libs/template.js"></script>
+<script type="text/javascript" src="/src/js/index.js"></script>
+<script type="text/javascript">
+
+</script>
+</body>
+
+</html>
