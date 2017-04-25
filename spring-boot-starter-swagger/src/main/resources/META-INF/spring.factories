@@ -1,2 +1,0 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.bigdatan.framework.swagger.configuration.SwaggerConfiguration
